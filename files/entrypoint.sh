@@ -41,4 +41,8 @@ echo ""
 # forward all command line arguments to lmgrd
 # NOTE: lmgrd -z flag is required to 'Run in foreground.' so that
 #       Docker will not start sleeping regardless flags.
-lmgrd -z $@
+if [ -z "$CERTS" ]; then
+    lmgrd -z $@
+else
+    lmgrd -z -c $CERTS $@
+fi
