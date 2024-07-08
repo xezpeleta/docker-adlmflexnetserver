@@ -14,6 +14,7 @@ ARG TEMP_PATH=/tmp/flexnetserver
 #########################################
 # add the flexlm commands to $PATH
 ENV PATH="${PATH}:/opt/flexnetserver/"
+ENV PATH="${PATH}:/vendors/"
 
 #########################################
 ##         RUN INSTALL SCRIPT          ##
@@ -42,12 +43,18 @@ RUN groupadd -r lmadmin && \
 ##              VOLUMES                ##
 #########################################
 VOLUME ["/var/flexlm"]
+# Save here your licenses
+VOLUME ["/licenses"]
+# Save here your vendor daemons
+VOLUME ["/vendors"]
 
 #########################################
 ##            EXPOSE PORTS             ##
 #########################################
 EXPOSE 2080
+EXPOSE 42630-42640
 EXPOSE 27000-27009
+EXPOSE 28000-28009
 
 # do not use ROOT user
 USER lmadmin
